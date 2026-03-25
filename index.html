@@ -40,9 +40,8 @@
   .socials a svg{width:16px;height:16px;fill:currentColor}
   .socials a:hover{border-color:var(--pink-dark);color:var(--pink-dark)}
   .hero-right{flex:1;display:flex;justify-content:center;align-items:center}
-  .hero-blob{width:min(420px,45vw);height:min(420px,45vw);background:linear-gradient(135deg,#ffd6e0,#ffb3c6);border-radius:60% 40% 55% 45%/50% 60% 40% 50%;display:flex;align-items:center;justify-content:center;animation:blob 6s ease-in-out infinite;position:relative}
-  @keyframes blob{0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}50%{border-radius:40% 60% 45% 55%/60% 40% 55% 45%}}
-  .hero-emoji{font-size:clamp(80px,10vw,130px)}
+  .hero-blob{width:300px;height:300px;min-width:300px;min-height:300px;border-radius:50%;border:4px solid var(--pink-dark);overflow:hidden;background:var(--border)}
+  .hero-blob img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 
   /* SECTIONS SHARED */
   section{padding:80px 7%}
@@ -55,10 +54,6 @@
   .about-text p{color:var(--muted);font-size:15px;margin-bottom:16px}
   .skills-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
   .skill{background:var(--card);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;color:var(--pink-dark)}
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center}
-  .stat-card .num{font-family:'DM Serif Display',serif;font-size:36px;color:var(--pink-dark)}
-  .stat-card .lbl{font-size:12px;color:var(--muted);margin-top:4px}
 
   /* EXPERIENCE */
   #experience{background:var(--bg)}
@@ -96,9 +91,8 @@
   @media(max-width:768px){
     #home{flex-direction:column;padding-top:120px}
     .hero-right{order:-1}
-    .hero-blob{width:200px;height:200px}
+    .hero-blob{width:200px;height:200px;min-width:200px;min-height:200px}
     .about-grid{grid-template-columns:1fr}
-    .stat-grid{grid-template-columns:1fr 1fr}
   }
 </style>
 </head>
@@ -134,7 +128,7 @@
   </div>
   <div class="hero-right">
     <div class="hero-blob">
-      <img src="images/rhea.jpg" alt="Rhea Johnson" id="heroPhoto">
+      <img src="images/rhea.jpg" alt="Rhea Johnson">
     </div>
   </div>
 </section>
@@ -155,7 +149,6 @@
         <span class="skill">Power BI</span><span class="skill">Flask</span><span class="skill">NumPy</span>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -256,7 +249,7 @@
     <div class="contact-links">
       <a href="mailto:rheadjohnson@gmail.com" class="contact-link">✉ rheadjohnson@gmail.com</a>
       <a href="tel:7143009745" class="contact-link">📞 (714) 300-9745</a>
-      <a href="https://linkedin.com" class="contact-link">in LinkedIn</a>
+      <a href="https://www.linkedin.com/in/rhea-johnson-0ba2741ba/" class="contact-link" target="_blank">in LinkedIn</a>
     </div>
   </div>
 </section>
@@ -266,7 +259,6 @@
 </footer>
 
 <script>
-  // Active nav highlight on scroll
   const sections = document.querySelectorAll('section[id]');
   const links = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
