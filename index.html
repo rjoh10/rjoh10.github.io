@@ -1,51 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-    <title>Your Name - Personal Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rhea Johnson</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#fff5f7;
+    --card:#fff0f3;
+    --pink:#f4a0b5;
+    --pink-dark:#e07a97;
+    --text:#3d2630;
+    --muted:#9a7080;
+    --border:#f7d0da;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:18px 7%;display:flex;align-items:center;justify-content:space-between;background:rgba(255,245,247,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .logo{width:38px;height:38px;background:var(--pink);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:600;color:#fff;font-size:16px;letter-spacing:-0.5px}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--pink-dark)}
+
+  /* HERO */
+  #home{min-height:100vh;display:flex;align-items:center;padding:100px 7% 60px;gap:40px}
+  .hero-left{flex:1}
+  .hero-tag{display:inline-block;background:var(--border);color:var(--pink-dark);font-size:12px;font-weight:600;letter-spacing:1.5px;padding:6px 14px;border-radius:20px;margin-bottom:20px;text-transform:uppercase}
+  .hero-left h1{font-family:'DM Serif Display',serif;font-size:clamp(42px,6vw,72px);line-height:1.1;color:var(--text);margin-bottom:16px}
+  .hero-left h1 em{color:var(--pink-dark);font-style:italic}
+  .hero-left p{font-size:16px;color:var(--muted);max-width:420px;margin-bottom:32px;font-weight:400}
+  .btn{display:inline-block;background:var(--pink-dark);color:#fff;padding:13px 28px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:1px;text-decoration:none;text-transform:uppercase;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(224,122,151,0.35)}
+  .socials{display:flex;gap:16px;margin-top:28px}
+  .socials a{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:15px;transition:border-color .2s,color .2s}
+  .socials a:hover{border-color:var(--pink-dark);color:var(--pink-dark)}
+  .hero-right{flex:1;display:flex;justify-content:center;align-items:center}
+  .hero-blob{width:min(420px,45vw);height:min(420px,45vw);background:linear-gradient(135deg,#ffd6e0,#ffb3c6);border-radius:60% 40% 55% 45%/50% 60% 40% 50%;display:flex;align-items:center;justify-content:center;animation:blob 6s ease-in-out infinite;position:relative}
+  @keyframes blob{0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}50%{border-radius:40% 60% 45% 55%/60% 40% 55% 45%}}
+  .hero-emoji{font-size:clamp(80px,10vw,130px)}
+
+  /* SECTIONS SHARED */
+  section{padding:80px 7%}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pink-dark);margin-bottom:10px}
+  .section-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,40px);color:var(--text);margin-bottom:40px}
+
+  /* ABOUT */
+  #about{background:#fff}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .about-text p{color:var(--muted);font-size:15px;margin-bottom:16px}
+  .skills-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .skill{background:var(--card);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;color:var(--pink-dark)}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center}
+  .stat-card .num{font-family:'DM Serif Display',serif;font-size:36px;color:var(--pink-dark)}
+  .stat-card .lbl{font-size:12px;color:var(--muted);margin-top:4px}
+
+  /* EXPERIENCE */
+  #experience{background:var(--bg)}
+  .exp-list{display:flex;flex-direction:column;gap:16px}
+  .exp-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 28px;display:flex;gap:20px;align-items:flex-start;transition:transform .2s,box-shadow .2s}
+  .exp-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(224,122,151,0.12)}
+  .exp-dot{width:44px;height:44px;min-width:44px;background:var(--card);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+  .exp-info h3{font-size:15px;font-weight:600;color:var(--text)}
+  .exp-info .role{font-size:13px;color:var(--pink-dark);font-weight:500;margin-bottom:4px}
+  .exp-info .date{font-size:12px;color:var(--muted);margin-bottom:8px}
+  .exp-info p{font-size:13px;color:var(--muted);line-height:1.5}
+
+  /* PROJECTS */
+  #projects{background:#fff}
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+  .proj-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;transition:transform .2s,box-shadow .2s;cursor:default}
+  .proj-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(224,122,151,0.15)}
+  .proj-tag{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--pink-dark);margin-bottom:12px}
+  .proj-card h3{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:10px;color:var(--text)}
+  .proj-card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+  .proj-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .proj-chips span{background:#fff;border:1px solid var(--border);border-radius:12px;font-size:11px;padding:3px 10px;color:var(--muted)}
+
+  /* CONTACT */
+  #contact{background:var(--bg);text-align:center}
+  .contact-box{max-width:520px;margin:0 auto}
+  .contact-box p{color:var(--muted);margin-bottom:28px;font-size:15px}
+  .contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  .contact-link{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:50px;border:1.5px solid var(--border);color:var(--text);text-decoration:none;font-size:13px;font-weight:500;background:#fff;transition:border-color .2s,color .2s}
+  .contact-link:hover{border-color:var(--pink-dark);color:var(--pink-dark)}
+
+  /* FOOTER */
+  footer{text-align:center;padding:24px;font-size:12px;color:var(--muted);border-top:1px solid var(--border)}
+
+  @media(max-width:768px){
+    #home{flex-direction:column;padding-top:120px}
+    .hero-right{order:-1}
+    .hero-blob{width:200px;height:200px}
+    .about-grid{grid-template-columns:1fr}
+    .stat-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Rhea Johnson</h1>
-        <p>Welcome to my personal website!</p>
-    </header>
-    <script src="scripts/main.js"></script>
-    <main>
-        <section>
-            <h2>About Me</h2>
-            <p>
-                Hi! My name is Rhea, and I’m a sophomore studying Data Science and Environmental Science! I am interested in using machine learning and programming to combat sustainability related issues. I'm from Southern California. <3 </p>
-        </section>
 
-        <section>
-            <h2>Contents</h2>
-            <ul>
-               
-                <h2>Music</h2>
-                <p>
-                    I'm a big fan of indie, indie rock, and bedroom rap music. My recent favorite artists are Yot Club, Noah Kahan, Mitski, and Skeggs.
-                </p>
-                <button onclick="goToMusicPage()">Click to see my go to music!</button>
-                <h2>Books</h2>
-                <p>
-                    My goal this year has been to complete a book every couple of weeks, and so far that goal has been met! I've included some of my favorite reads so far below!
-                </p>
-                <button onclick="goToNextPage()">Click to see my favorite reads this year!</button>
+<nav>
+  <div class="logo">RJ</div>
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-                <h2>Cafes</h2>
-                <p>
-                    I take cafe-hopping very seriously, so it is something that I must include here. Boston has so many good spots and I'm excited to see more!
-                </p>
-                <button onclick="goToCafePage()">Click to see my favorite cafes and rankings!</button>
-            </ul>
-        </section>
-        <section>
-            <img src="images/IMG_4924.png" alt="My test image" style="max-width: 30%; height: 30%;" />
-            <img src="images/IMG_5678 2.png" alt="Description for Image 2"  id="image2"style="max-width: 30%; height: 30%;" >
-        </section>
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-tag">✦ Open to opportunities</div>
+    <h1>Hi, I'm<br><em>Rhea Johnson</em></h1>
+    <p>Data Science & Sustainability Sciences student at Northeastern. I build data tools that make the world a little greener. 🌿</p>
+    <a href="#contact" class="btn">Say Hello</a>
+    <div class="socials">
+      <a href="mailto:rheadjohnson@gmail.com" title="Email">✉</a>
+      <a href="https://linkedin.com" title="LinkedIn">in</a>
+      <a href="https://github.com" title="GitHub">⌥</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-blob">
+      <div class="hero-emoji">🌸</div>
+    </div>
+  </div>
+</section>
 
-    
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <div class="section-title">Data-driven, sustainability-focused</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a sophomore at Northeastern University's Khoury College of Computer Sciences (GPA 3.7), pursuing a dual degree in Data Science and Sustainability Sciences.</p>
+      <p>I'm passionate about using machine learning and programming to tackle climate and sustainability challenges — from wildfire prediction to clean energy dashboards.</p>
+      <p>When I'm not coding, you'll find me cafe-hopping around Boston, reading, or listening to indie music. ☕</p>
+      <div class="skills-wrap" style="margin-top:20px">
+        <span class="skill">Python</span><span class="skill">R</span><span class="skill">SQL</span>
+        <span class="skill">Java</span><span class="skill">JavaScript</span><span class="skill">MongoDB</span>
+        <span class="skill">Pandas</span><span class="skill">Scikit-learn</span><span class="skill">ArcGIS</span>
+        <span class="skill">Power BI</span><span class="skill">Flask</span><span class="skill">NumPy</span>
+      </div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">3.7</div>
+        <div class="lbl">GPA · Dean's List</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">5+</div>
+        <div class="lbl">Projects Built</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">3</div>
+        <div class="lbl">Co-ops & Internships</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">275k</div>
+        <div class="lbl">Records Analyzed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work Experience</div>
+  <div class="section-title">Where I've worked</div>
+  <div class="exp-list">
+    <div class="exp-card">
+      <div class="exp-dot">✈️</div>
+      <div class="exp-info">
+        <div class="role">Data Analyst Co-op</div>
+        <h3>GE Aerospace</h3>
+        <div class="date">July 2025 – December 2025</div>
+        <p>Designed dashboards helping airlines track compliance costs and emissions. Built ML models in Python (KNN, Bayesian, Sklearn) for Cirium flight data classification and prediction.</p>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-dot">🌬️</div>
+      <div class="exp-info">
+        <div class="role">AI & Business Intelligence Intern</div>
+        <h3>Offshore Construction Associates</h3>
+        <div class="date">May 2025 – June 2025</div>
+        <p>Supported global offshore wind consulting projects, integrating AI and BI tools into internal and client-facing workflows through technical research and documentation.</p>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-dot">⚡</div>
+      <div class="exp-info">
+        <div class="role">Clean Technology Innovation Co-op</div>
+        <h3>Massachusetts Clean Energy Center</h3>
+        <div class="date">July 2024 – December 2024</div>
+        <p>Worked on the Tech-to-Market team developing RFP applications and maintaining ClimateTech solution impact metrics in Excel for milestone deliverables.</p>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-dot">🗄️</div>
+      <div class="exp-info">
+        <div class="role">Teaching Assistant · CS3200: Database Design</div>
+        <h3>Khoury College of Computer Science</h3>
+        <div class="date">April 2025 – Present</div>
+        <p>Supported instruction covering relational models, SQL, ER diagrams, and schemas. Designed SQL homework problems and held office hours clarifying complex database concepts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <div class="section-title">Things I've built</div>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-tag">🐀 Civic Tech · 2025</div>
+      <h3>Boston Rodent Data Dashboard</h3>
+      <p>Led a Scout Labs team to build an interactive choropleth dashboard mapping rodent 311 complaints across Boston, analyzing 275k+ records with GeoPandas for the Mayor's Office of New Urban Mechanics.</p>
+      <div class="proj-chips"><span>Python</span><span>SQL</span><span>GeoPandas</span><span>City of Boston</span></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-tag">🔥 ML · 2024</div>
+      <h3>Predicting California Wildfire Sizes</h3>
+      <p>Investigated correlation between wildfire causes and fire size using Logistic Regression, Random Forest, and Gradient Boosting to drive fire management decision-making.</p>
+      <div class="proj-chips"><span>Python</span><span>Sklearn</span><span>Random Forest</span><span>Gradient Boosting</span></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-tag">💼 ML · 2023</div>
+      <h3>Predictive Salary Classification</h3>
+      <p>Analyzed how demographics and profession influence salary classifications using predictive modeling techniques.</p>
+      <div class="proj-chips"><span>Python</span><span>ML</span><span>Data Analysis</span></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-tag">🍽️ Database · 2023</div>
+      <h3>Restaurant Allergen Database (RAD)</h3>
+      <p>Designed and built a relational database system to help users identify and manage restaurant menu allergens safely.</p>
+      <div class="proj-chips"><span>MySQL</span><span>Database Design</span><span>ER Diagrams</span></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-tag">♻️ Hackathon · 2022</div>
+      <h3>ReScan</h3>
+      <p>Built a sustainability-focused tool at a hackathon using Vue.js.</p>
+      <div class="proj-chips"><span>Vue.js</span><span>Hackathon</span></div>
+    </div>
+    <div class="proj-card" style="background:linear-gradient(135deg,#ffd6e0,#ffb3c6);border-color:transparent">
+      <div class="proj-tag" style="color:#c05a78">🌿 Currently</div>
+      <h3 style="color:#3d2630">Scout NEU · Project Lead</h3>
+      <p style="color:#7a4055">Leading designers and developers to build environmental & health violation dashboards for the City of Boston in collaboration with MONUM.</p>
+      <div class="proj-chips"><span style="background:rgba(255,255,255,0.7)">Data Viz</span><span style="background:rgba(255,255,255,0.7)">Civic Tech</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="section-title">Let's connect ✨</div>
+  <div class="contact-box">
+    <p>I'm always open to new opportunities, collaborations, or just a chat about data, sustainability, or Boston's best cafes.</p>
+    <div class="contact-links">
+      <a href="mailto:rheadjohnson@gmail.com" class="contact-link">✉ rheadjohnson@gmail.com</a>
+      <a href="tel:7143009745" class="contact-link">📞 (714) 300-9745</a>
+      <a href="https://linkedin.com" class="contact-link">in LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Made with 🩷 by Rhea Johnson · Northeastern University '26
+</footer>
+
+<script>
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) cur = s.id; });
+    links.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#'+cur); });
+  });
+</script>
+</body>
+</html>
